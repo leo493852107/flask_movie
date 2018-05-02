@@ -6,7 +6,6 @@ __time__ = "2018-04-27"
 
 from datetime import datetime
 
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
@@ -177,7 +176,7 @@ class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-    is_super = db.Column(db.SmallInteger)   # 0 超级管理员
+    is_super = db.Column(db.SmallInteger)  # 0 超级管理员
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     uuid = db.Column(db.String(255), unique=True)
     admin_logs = db.relationship("AdminLog", backref='admin')
