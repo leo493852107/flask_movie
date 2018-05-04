@@ -6,16 +6,8 @@ __time__ = "2018-04-27"
 
 from datetime import datetime
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-import pymysql
-from werkzeug.security import generate_password_hash
-
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:@127.0.0.1:3306/flask_movie"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-
-db = SQLAlchemy(app)
+from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model):
@@ -184,6 +176,9 @@ class Admin(db.Model):
 
     def __repr__(self):
         return '<Admin %r>' % self.name
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
 class AdminLog(db.Model):
