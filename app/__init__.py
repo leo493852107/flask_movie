@@ -4,6 +4,7 @@
 __author__ = "leo"
 __time__ = "2018-04-27"
 
+import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
@@ -12,6 +13,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:@127.0.0.1:3306/flask_movie"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["SECRET_KEY"] = "d1e73fd49dfd4f8bbd04407f6b1b9be0"
+app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/")
 app.debug = True
 
 db = SQLAlchemy(app)
